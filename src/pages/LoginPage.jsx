@@ -83,15 +83,6 @@ export default function LoginPage() {
                         )}
                     </Button>
                 </form>
-                <div className="demo-account">
-                    <h2>Demo account</h2>
-                    <dl>
-                        <dt>Email</dt>
-                        <dd>demo@visitflow.test</dd>
-                        <dt>Password</dt>
-                        <dd>Demo12345!</dd>
-                    </dl>
-                </div>
             </section>
         </main>
     );

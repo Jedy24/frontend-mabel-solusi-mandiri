@@ -1,13 +1,13 @@
-import { LoaderCircle } from 'lucide-react';
-
-export default function LoadingState({ message = 'Loading visits…' }) {
+export default function LoadingState({ message = 'Loading visits…', compact = false }) {
     return (
         <div
-            className="flex items-center justify-center gap-2 px-4 py-10 text-sm text-slate-600"
+            className={compact ? 'skeleton-list skeleton-list-compact' : 'skeleton-list'}
             role="status"
         >
-            <LoaderCircle className="animate-spin" size={18} aria-hidden="true" />
-            {message}
+            <span className="sr-only">{message}</span>
+            {[0, 1, 2].map((row) => (
+                <span className="skeleton skeleton-line" key={row} aria-hidden="true" />
+            ))}
         </div>
     );
 }

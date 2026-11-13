@@ -35,7 +35,7 @@ The dashboard requests matching rows from the API and derives its summary counts
 - React handles UI state and reusable components. React Router guards the dashboard. Vite provides a local dev server and a production build.
 - Axios centralizes the API origin, Bearer authentication, timeouts, cancellation, and expired-session handling.
 - Tailwind CSS supplies utilities for spacing and layout. Lucide React supplies the interface icons. ESLint and Prettier enforce consistent source conventions.
-- The visit date is handled as a calendar date. Search is debounced, and requests are canceled when newer filters supersede them.
+- The visit date is handled as a calendar date. Apply an entity-name search with Enter or the Search button. Other filters apply immediately. The Add Visit dialog has searchable Entity and Sales dropdowns. Entity search uses the API with a short delay and preserves history fallback. Sales search filters the loaded catalog locally.
 
 ## Known limitations
 
@@ -43,4 +43,4 @@ The prototype stores an eight-hour JWT in browser local storage. It uses one dem
 
 ## AI Usage Disclosure
 
-Estimated AI assistance is approximately **100% of this repository's implementation during the recorded session**. Codex authored the React routes, authentication and API clients, visit dashboard, forms, styling, configuration, and documentation from the supplied requirements. Codex reviewed the implementation and ran lint, the production build, and a Chrome smoke check covering sign-in, filtered totals, entity fallback, creation, both status changes, reload persistence, the mobile layout, and logout. Candidate manual review and test verification are unrecorded for this session.
+Codex assisted with most of the initial implementation, including the React routes, authentication, API clients, dashboard, and styling. The project author defined the requirements, reviewed the dashboard behavior, and reported the excessive search requests and the separate entity search field. Codex implemented the resulting search, dropdown, and loading-state changes. Verification included ESLint, the production build, and Chrome checks for search requests, dropdowns, visit creation, and mobile layout. A project-wide percentage was not measured.

@@ -2,7 +2,14 @@ import { RotateCcw, Search } from 'lucide-react';
 import Button from '../common/Button';
 import Input from '../common/Input';
 
-export default function ActivityFilters({ filters, onChange, onReset, dateError, hasFilters }) {
+export default function ActivityFilters({
+    filters,
+    onChange,
+    onSearch,
+    onReset,
+    dateError,
+    hasFilters
+}) {
     return (
         <section className="panel filters" aria-labelledby="filters-title">
             <div className="filters-heading">
@@ -12,7 +19,13 @@ export default function ActivityFilters({ filters, onChange, onReset, dateError,
                 </Button>
             </div>
             <div className="filter-grid">
-                <div className="search-field">
+                <form
+                    className="search-field"
+                    onSubmit={(event) => {
+                        event.preventDefault();
+                        onSearch();
+                    }}
+                >
                     <Input
                         id="visit-search"
                         label="Entity name"
@@ -22,8 +35,10 @@ export default function ActivityFilters({ filters, onChange, onReset, dateError,
                         value={filters.search}
                         onChange={(event) => onChange('search', event.target.value)}
                     />
-                    <Search size={16} aria-hidden="true" />
-                </div>
+                    <Button type="submit" variant="secondary" className="search-submit">
+                        <Search size={16} aria-hidden="true" /> Search
+                    </Button>
+                </form>
                 <Input
                     id="filter-segment"
                     label="Segment"

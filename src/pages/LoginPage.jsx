@@ -1,4 +1,4 @@
-import { ArrowRight, LoaderCircle } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { requestError } from '../api/axios';
@@ -76,11 +76,7 @@ export default function LoginPage() {
                     )}
                     <Button className="login-submit" type="submit" disabled={pending}>
                         {pending ? 'Signing in…' : 'Sign in'}
-                        {pending ? (
-                            <LoaderCircle className="animate-spin" size={17} aria-hidden="true" />
-                        ) : (
-                            <ArrowRight size={17} aria-hidden="true" />
-                        )}
+                        {!pending && <ArrowRight size={17} aria-hidden="true" />}
                     </Button>
                 </form>
             </section>

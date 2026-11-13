@@ -27,14 +27,8 @@ export default function DashboardPage() {
     const dateError = from && to && from > to ? 'End date must be on or after the start date' : '';
     const hasFilters = Object.values(filters).some(Boolean);
     const requestKey = JSON.stringify([segment, status, from, to, search, version]);
-    const loading =
-        !dateError && (completedRequest !== requestKey || filters.search.trim() !== search);
+    const loading = !dateError && completedRequest !== requestKey;
     const showResults = !loading && !dateError && !listError;
-
-    useEffect(() => {
-        const timer = window.setTimeout(() => setSearch(filters.search.trim()), 300);
-        return () => window.clearTimeout(timer);
-    }, [filters.search]);
 
     useEffect(() => {
         if (dateError) {
@@ -129,7 +123,18 @@ export default function DashboardPage() {
                         </span>
                         <div>
                             <p>{label}</p>
-                            <strong>{showResults ? value : '—'}</strong>
+                            <strong>
+                                {loading ? (
+                                    <span
+                                        className="skeleton metric-placeholder"
+                                        aria-hidden="true"
+                                    />
+                                ) : showResults ? (
+                                    value
+                                ) : (
+                                    '—'
+                                )}
+                            </strong>
                         </div>
                     </div>
                 ))}
@@ -141,6 +146,7 @@ export default function DashboardPage() {
                 onChange={(field, value) =>
                     setFilters((current) => ({ ...current, [field]: value }))
                 }
+                onSearch={() => setSearch(filters.search.trim())}
                 onReset={() => {
                     setFilters(emptyFilters);
                     setSearch('');

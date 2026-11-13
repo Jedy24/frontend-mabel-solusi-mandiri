@@ -1,4 +1,4 @@
-import { Check, LoaderCircle, Undo2 } from 'lucide-react';
+import { Check, Undo2 } from 'lucide-react';
 import Button from '../common/Button';
 
 const dateFormat = new Intl.DateTimeFormat('en-GB', {
@@ -64,15 +64,7 @@ export default function ActivityTable({ activities, updatingIds, onStatusChange 
                                         }
                                         onClick={() => onStatusChange(activity)}
                                     >
-                                        {updating ? (
-                                            <LoaderCircle
-                                                size={14}
-                                                className="animate-spin"
-                                                aria-hidden="true"
-                                            />
-                                        ) : (
-                                            <Icon size={14} aria-hidden="true" />
-                                        )}
+                                        {!updating && <Icon size={14} aria-hidden="true" />}
                                         {updating ? 'Saving…' : action}
                                     </Button>
                                 </td>

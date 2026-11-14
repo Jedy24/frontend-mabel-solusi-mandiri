@@ -41,16 +41,38 @@ function CatalogForm({ resource, form, setForm, editing, errors, busy, onSubmit,
         );
     }
 
-    function checkbox(name, label) {
+    function catalogSwitch(name, label, description) {
+        const id = 'admin-' + name;
+        const describedBy = id + '-description' + (errors[name] ? ' ' + id + '-error' : '');
+
         return (
-            <label className="flex items-center gap-2">
+            <div className="catalog-setting">
+                <div>
+                    <label htmlFor={id} id={id + '-label'}>
+                        {label}
+                    </label>
+                    <p id={id + '-description'}>{description}</p>
+                    {errors[name] && (
+                        <p className="field-error" id={id + '-error'}>
+                            {errors[name]}
+                        </p>
+                    )}
+                </div>
+                <label className="catalog-toggle" htmlFor={id} aria-hidden="true">
+                    <span className="catalog-toggle-track" />
+                </label>
                 <input
+                    className="sr-only catalog-toggle-input"
+                    id={id}
                     type="checkbox"
+                    role="switch"
+                    aria-labelledby={id + '-label'}
+                    aria-describedby={describedBy}
+                    aria-invalid={errors[name] ? true : undefined}
                     checked={form[name]}
                     onChange={(event) => setForm({ ...form, [name]: event.target.checked })}
                 />
-                {label}
-            </label>
+            </div>
         );
     }
 
@@ -93,10 +115,31 @@ function CatalogForm({ resource, form, setForm, editing, errors, busy, onSubmit,
                             <option value="B2B">B2B</option>
                         </Input>
                         {field('region', 'Region', { maxLength: 100 })}
-                        {checkbox('isMaster', 'Master catalog')}
                     </>
                 )}
-                {editing && checkbox('isActive', 'Active')}
+                {(resource === 'entities' || editing) && (
+                    <div
+                        className="catalog-settings"
+                        role="group"
+                        aria-labelledby="catalog-settings-title"
+                    >
+                        <h3 id="catalog-settings-title">Catalog settings</h3>
+                        <div className="catalog-settings-grid">
+                            {resource === 'entities' &&
+                                catalogSwitch(
+                                    'isMaster',
+                                    'Master catalog',
+                                    'Include in the main Entity dropdown. When off, an entity with past visits can still appear as a fallback.'
+                                )}
+                            {editing &&
+                                catalogSwitch(
+                                    'isActive',
+                                    'Active',
+                                    'Turn off to hide this item from new visits while keeping its visit history.'
+                                )}
+                        </div>
+                    </div>
+                )}
             </fieldset>
             <div className="admin-actions">
                 <Button type="submit" disabled={busy}>

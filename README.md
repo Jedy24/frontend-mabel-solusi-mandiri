@@ -25,10 +25,15 @@ npm run build
 
 | Route    | Purpose                                                                                                                                                             |
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/login` | Demo sign-in, with loading and error feedback.                                                                                                                      |
+| `/login` | Sign-in with a password visibility toggle, loading, and error feedback.                                                                                             |
 | `/`      | Visit Management dashboard with filtered totals, visit search, date range and status filters, entity selection, visit creation, and status updates. Requires login. |
+| `/admin` | Manage users, entities, sales, and audit history. Requires an ADMIN account.                                                                                        |
 
 The dashboard requests matching rows from the API and derives its summary counts from those rows. The Add Visit dialog loads entities for the selected segment. Searching for **Cemara** in **B2G** demonstrates the history fallback when master data has no matching entity.
+
+## Try the Admin area
+
+Create an admin account using the backend README, then sign in with that account. Choose **Admin** in the navbar to manage users and catalogs, or open the **Audit log** section to review changes. Choose **Back to Visit Management** to return to the shared dashboard and add or update visits. Sign in with the demo account to try regular USER access.
 
 ## Stack and decisions
 
@@ -39,8 +44,11 @@ The dashboard requests matching rows from the API and derives its summary counts
 
 ## Known limitations
 
-The prototype stores an eight-hour JWT in browser local storage. It uses one demo account, and the visit table scrolls horizontally on narrow screens. Filters reset when the page reloads. The API must be running for sign-in and visit management.
+The prototype stores an eight-hour JWT in browser local storage. A seeded USER account is available for evaluation. The visit table scrolls horizontally on narrow screens. Filters reset when the page reloads. The API must be running for sign-in and visit management.
 
 ## AI Usage Disclosure
 
-Codex assisted with most of the initial implementation, including the React routes, authentication, API clients, dashboard, and styling. The project author defined the requirements, reviewed the dashboard behavior, and reported the excessive search requests and the separate entity search field. Codex implemented the resulting search, dropdown, and loading-state changes. Verification included ESLint, the production build, and Chrome checks for search requests, dropdowns, visit creation, and mobile layout. A project-wide percentage was not measured.
+- **Project author** supplied the requirements, reviewed the app in use, reported the search and navigation issues, and applied the password toggle and Admin interface changes from the Visit Flow guide.
+- **Codex** assisted with the initial React implementation, the searchable dropdowns and loading states, and the guide's code for the password toggle and Admin interface. Codex also updated the shared layout, navigation, and Admin styling after the author's review.
+
+This disclosure describes the work by feature. A project-wide percentage was not measured.

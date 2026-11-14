@@ -3,6 +3,8 @@ import MainLayout from './components/layout/MainLayout';
 import DashboardPage from './pages/DashboardPage';
 import LoginPage from './pages/LoginPage';
 import ProtectedRoute from './routes/ProtectedRoute';
+import AdminPage from './pages/AdminPage';
+import AdminRoute from './routes/AdminRoute';
 
 export default function App() {
     return (
@@ -11,6 +13,9 @@ export default function App() {
             <Route element={<ProtectedRoute />}>
                 <Route element={<MainLayout />}>
                     <Route index element={<DashboardPage />} />
+                    <Route element={<AdminRoute />}>
+                        <Route path="admin" element={<AdminPage />} />
+                    </Route>
                 </Route>
             </Route>
             <Route path="*" element={<Navigate to="/" replace />} />

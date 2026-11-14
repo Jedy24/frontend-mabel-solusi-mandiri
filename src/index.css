@@ -699,3 +699,117 @@ tbody td:nth-child(7) {
         animation: none;
     }
 }
+
+.password-field {
+    position: relative;
+}
+
+.password-field input {
+    padding-right: 46px;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 26px;
+    right: 1px;
+    width: 42px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+    border-radius: 8px;
+}
+
+.password-toggle:hover {
+    background: #eef3fb;
+}
+
+.admin-link[aria-current='page'] {
+    background: #eaf0ff;
+}
+
+.admin-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px;
+}
+
+.admin-nav .button[aria-pressed='true'] {
+    background: #eaf0ff;
+    color: #214bb0;
+}
+
+.admin-section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.admin-section-heading p,
+.admin-item p {
+    color: var(--muted);
+    font-size: 0.8125rem;
+}
+
+.admin-panel {
+    display: grid;
+    gap: 14px;
+    padding: 18px;
+}
+
+.admin-fields {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+}
+
+.admin-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.admin-list {
+    display: grid;
+    border-block: 1px solid var(--line);
+}
+
+.admin-item + .admin-item {
+    border-top: 1px solid var(--line);
+}
+
+.admin-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 4px;
+    overflow-wrap: anywhere;
+}
+
+.admin-item strong {
+    font-size: 0.875rem;
+}
+
+.admin-item pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-size: 0.8rem;
+    margin-top: 8px;
+}
+
+@media (max-width: 620px) {
+    .topbar-content {
+        flex-wrap: wrap;
+        padding-block: 8px;
+    }
+
+    .account {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+}
